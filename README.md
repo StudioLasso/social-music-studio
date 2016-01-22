@@ -1,6 +1,6 @@
 # Social music studio
 
-[![Build Status](https://travis-ci.org/studiolasso/social-music-studio.svg?branch=master)](https://travis-ci.org/studiolasso/social-music-studio)
+[![Build Status](https://travis-ci.org/StudioLasso/social-music-studio.svg?branch=master)](https://travis-ci.org/StudioLasso/social-music-studio)
 [![Dependency Status](https://david-dm.org/studiolasso/social-music-studio.svg)](https://david-dm.org/studiolasso/social-music-studio)
 [![devDependency Status](https://david-dm.org/studiolasso/social-music-studio/dev-status.svg)](https://david-dm.org/studiolasso/social-music-studio#info=devDependencies)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=flat-square)](https://github.com/semantic-release/semantic-release)
