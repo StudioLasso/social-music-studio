@@ -7,7 +7,6 @@ notifications:
   on_failure: change
 node_js:
   - "5"
-  - "4"
 before_script:
   - npm prune
 script: PUBLIC_PATH=/social-music-studio npm run build
