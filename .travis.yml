@@ -6,7 +6,7 @@ cache:
 notifications:
   on_failure: change
 node_js:
-  - stable
+  - "5"
   - "4"
 before_script:
   - npm prune
