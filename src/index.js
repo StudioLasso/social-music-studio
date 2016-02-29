@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import App from './App';
+import Studio from './js';
 
 import styles from './assets/styles/styles.less';
 
 ReactDom.render(
-	<App />,
+	<Studio />,
 	document.getElementById('app')
 );

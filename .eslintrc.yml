@@ -12,9 +12,6 @@ rules:
   strict: 0
   no-unused-vars:
   	- 0
-  indent:
-    - 2
-    - tab
   quotes:
     - 2
     - single
@@ -43,8 +40,6 @@ rules:
   max-statements:
     - 2
     - 20
-  require-jsdoc:
-    - 2
   no-var:
     - 2
   object-shorthand:
@@ -71,7 +66,7 @@ rules:
     - 2
   no-else-return:
     - 2
-  no-empty-label:
+  no-labels:
     - 2
   no-lone-blocks:
     - 2

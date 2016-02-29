@@ -1,0 +1,70 @@
+.topContainer {
+    display:flex;
+}
+
+.sideCol {
+    flex:2;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.margR10  {
+    margin-right: 10px;
+}
+
+.cadran {
+    background-color: #F6F6F6;
+    line-height: 70px;
+    text-align: center;
+    font-family: 'Abel', sans-serif;
+    font-size: 30px;
+    margin-right: 10px;
+    border-radius: 5px;
+    flex: 1;
+    border: 1px solid #EEE;
+    overflow: hidden;
+}
+
+.volContainer {
+    width: 100px;
+    margin-right: 10px;
+    margin-left: 20px;
+}
+
+.label {
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.bpmContainer {
+    border: 1px solid #EEE;
+    padding: 5px;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.form {
+    display: flex;
+}
+
+.tempo {
+    width: 80px;
+    margin-right: 10px;
+}
+
+.tempoType {
+    width: 80px;
+}
+
+.record {
+    color: #C00;
+}
+
+.publish: {
+    color: rgba(101,1,1,1);
+}
+
+.recordActionsStyles {
+    display: none;
+}

@@ -1,0 +1,8 @@
+.root {
+    cursor: pointer;
+    height: 0.8rem !important;
+}
+
+.root .progress-bar {
+    transition: none;
+}

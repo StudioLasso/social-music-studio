@@ -9,10 +9,14 @@ const process = require('process');
 const config = {
 	entry: {
 		vendor: [
-			'imports?exports=>false&module=>false!jquery',
-			'imports?exports=>false&module=>false!react',
+			'react',
 			'react-dom',
-			'imports?exports=>false&module=>false!bootstrapjs'
+			'script!jquery',
+			'script!bootstrapjs',
+			'script!sidebar',
+			'imports?exports=>false&module=>false!firebase',
+			'recorderjs',
+			'moment'
 		],
 		app: './src/index.js'
 	}, 
@@ -22,31 +26,25 @@ const config = {
 		publicPath: process.env.PUBLIC_PATH || '/'
 	},
 	resolve: {
-		extensions: ['', '.webpack.js', '.web.js', '.js', '.less'],
+		extensions: ['', '.webpack.js', '.web.js', '.js', '.css'],
 		root: __dirname,
+		modulesDirectories: ['node_modules', 'bower_components', 'src/js'],
 		alias: {
-			jquery: 'jquery/dist/jquery.min.js',
-			react: 'react/dist/react.min.js',
-			'react-dom': 'react-dom/dist/react-dom.min.js',
-			'bootstrapjs': 'bootstrap/dist/js/bootstrap.min.js'
+			'bootstrapjs': 'bootstrap/dist/js/bootstrap.min.js',
+			'sidebar': 'bootstrap-sidebar/dist/js/sidebar.js',
 		}
 	},
 	module: {
 		preLoaders: [
-			{ test: /\.js$/, loader: 'eslint', exclude: /node_modules/}  
+			{ test: /\.js$/, loader: 'eslint', exclude: /node_modules|bower_components/}  
 		],
 		loaders: [
-			{ test: /\.js/, loaders: ['babel'], exclude: /node_modules/ },
+			{ test: /\.js/, loaders: ['babel'], exclude: /node_modules|bower_components/ },
 			{ test: /\.woff2?(\?v=\d+\.\d+\.\d+)?$/,   loader: 'url?limit=100000&mimetype=application/font-woff' },
 			{ test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,    loader: 'url?limit=100000&mimetype=application/octet-stream' },
 			{ test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,    loader: 'file' },
 			{ test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,    loader: 'url?limit=100000&mimetype=image/svg+xml' },
 			{ test: /\.jpg$/, loader: 'url?limit?100000'}
-		],
-		noParse: [
-			/react\.min\.js$/,
-			/jquery\.min\.js$/,
-			/bootstrap\.min\.js$/
 		]
 	},
 	plugins: [
@@ -54,7 +52,10 @@ const config = {
 			template: './src/index.html',
 			inject: 'body'
 		}),
-		new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js')
+		new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js'),
+		new webpack.DefinePlugin({
+			__DEVTOOLS__: process.env.NODE_ENV !== 'production'
+		})
 	],				
 	progress: true,
 	target: 'web'
@@ -70,9 +71,15 @@ if (process.env.NODE_ENV !== 'production') {
 			'style',
 			'css?sourceMap',
 			'less?sourceMap'
-		]}
+		]}, {
+			test: /js.*\.css/, 
+			loaders: [
+				'style',
+				'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
+			]
+		}
 	]);
-	config.devtool = 'eval-cheap-module-source-map';
+	config.devtool = 'source-map';
 	config.debug = true;
 } else {
 	config.plugins = config.plugins.concat([
@@ -82,10 +89,19 @@ if (process.env.NODE_ENV !== 'production') {
 		new ExtractTextPlugin('[name].css')
 	]);
 	config.module.loaders = config.module.loaders.concat([
-		{ test: /\.less/, loader: ExtractTextPlugin.extract(
-			'style',
-			'css-loader?sourceMap&minimize!less-loader?sourceMap'
-		)}
+		{ 
+			test: /\.less/, 
+			loader: ExtractTextPlugin.extract(
+				'style',
+				'css-loader?sourceMap&minimize!less-loader?sourceMap'
+			)
+		}, {
+			test: /js.*\.css/, 
+			loader: ExtractTextPlugin.extract(
+				'style',
+				'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]&sourceMap'
+			)	
+		}
 	]);
 	config.devtool = 'source-map';
 	config.debug = false;
